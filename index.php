@@ -104,7 +104,7 @@ $result = mysqli_query($koneksi, "SELECT * FROM task ORDER BY status ASC, priori
                     <?php if ($row['status'] == 0) { ?>
                         <a href="?complete=<?php echo $row['id'] ?>" class="btn btn-success btn-sm" <i class="fas fa-check">Selesai</i></a>
                     <?php } ?>
-                    <a href="?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm" <i class="fas fa-trash">Hapus</i></a>
+                        <a href="?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm" <i class="fas fa-trash">Hapus</i></a>
                 </td>
                 </tr>
             <?php }

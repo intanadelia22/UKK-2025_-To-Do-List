@@ -47,6 +47,62 @@ $result = mysqli_query($koneksi, "SELECT * FROM task ORDER BY status ASC, priori
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 700px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+input, select {
+    margin-bottom: 15px;
+}
+
+.table {
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+th, td {
+    vertical-align: middle;
+    padding: 12px;
+    text-align: center;
+}
+
+span {
+    font-size: 14px;
+    font-weight: normal;
+}
+</style>
+
 <body>
     <div class="container mt-2">
         <h2 class="text-center">Aplikasi To Do List</h2>

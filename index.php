@@ -12,7 +12,7 @@ if (isset($_POST['add_task'])) {
 
         echo "<script>alert('Task Berhasil ditambahkan')</script>";
     } else {
-        echo "<script>alert('Task Berhasil ditambahkan')</script>";
+        echo "<script>alert('Task Gagal ditambahkan')</script>";
         header("location : index.php");   
     }
 }
@@ -22,7 +22,7 @@ if (isset($_GET['complete'])) {
     $id = $_GET['complete'];
     mysqli_query($koneksi, "UPDATE task SET status = '1' WHERE id = '$id'");
     echo "<script>alert('Task berhasil diselesaikan')</script>";
-    header("location: index.php");
+    header("location: index.php");  //HALAMAN REFRESH
 }
 
 // HAPUS TASK
@@ -33,7 +33,7 @@ if (isset($_GET['delete'])) {
     header("location: index.php");
 }
 
-// Menampilkan Task
+// MENAMPILKAN TASK
 $result = mysqli_query($koneksi, "SELECT * FROM task ORDER BY status ASC, priority DESC, due_date ASC");
 ?>
 

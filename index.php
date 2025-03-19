@@ -55,12 +55,30 @@ $result = mysqli_query($koneksi, "SELECT * FROM task ORDER BY status ASC, priori
 }
 
 .container {
-    max-width: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.form-container {
+    flex: 1;
     background: white;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
+    max-width: 350px;
+}
+
+.table-container {
+    flex: 2;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
 }
 
 h2 {
@@ -68,10 +86,6 @@ h2 {
     color: #343a40;
     text-align: center;
     margin-bottom: 20px;
-}
-
-form {
-    margin-bottom: 25px;
 }
 
 .form-label {
@@ -83,91 +97,113 @@ input, select {
     margin-bottom: 15px;
 }
 
+button {
+    width: 100%;
+}
+
 .table {
-    margin-top: 20px;
-    background: white;
-    border-radius: 10px;
+    width: 100%;
+    border-collapse: separate; /* Mencegah border-radius terpotong */
+    border-spacing: 0; /* Menghapus spasi antar border */
     overflow: hidden;
     text-align: center;
+}
+
+.table thead tr:first-child th {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.table tbody tr:last-child td {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 th, td {
     vertical-align: middle;
     padding: 12px;
     text-align: center;
+    border: 1px solid #dee2e6;
 }
 
 span {
     font-size: 14px;
     font-weight: normal;
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
 </style>
 
 <body>
-    <div class="container mt-2">
+<div class="container">
+    <!-- Form di kiri -->
+    <div class="form-container">
         <h2 class="text-center">Aplikasi To Do List</h2>
-        <form action="" method="post" class="border rounded bg-light p-2">
+        <form action="" method="post">
             <label class="form-label">Nama Task</label>
-            <input type="text" name="task" class="form-control" placeholder="Masukan Task Baru" autocomplete="off" autofocus required>
+            <input type="text" name="task" class="form-control" placeholder="Masukkan Task Baru" autocomplete="off" required>
+            
             <label class="form-label">Prioritas</label>
             <select name="priority" class="form-control" required>
-                <option value="">--Pilih Prioritas--</option>
+                <option value="">-- Pilih Prioritas --</option>
                 <option value="1">Low</option>
                 <option value="2">Medium</option>
                 <option value="3">High</option>
             </select>
+
             <label class="form-label">Tanggal</label>
             <input type="date" name="due_date" class="form-control" value="<?php echo date('Y-m-d') ?>" required>
-            <button class="btn btn-primary w-100 mt-2" name="add_task">Tambah</button>
-</form>
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Task</th>
-                <th>Priority</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
+
+            <button class="btn btn-primary mt-2" name="add_task">Tambah</button>
+        </form>
+    </div>
+
+    <!-- Tabel di kanan -->
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Task</th>
+                    <th>Prioritas</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
-            if (mysqli_num_rows($result) > 0) { 
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
+                if (mysqli_num_rows($result) > 0) { 
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $row['task'] ?></td>
-                    <td><?php
-                    if ($row['priority'] == 1) {
-                        echo "Low";
-                    } elseif ($row['priority'] == 2) {
-                        echo "Medium";
-                    } else {
-                        echo "High";
-                    }?></td>
+                    <td>
+                        <?php echo ($row['priority'] == 1) ? "Low" : (($row['priority'] == 2) ? "Medium" : "High"); ?>
+                    </td>
                     <td><?php echo $row['due_date'] ?></td>
-                    <td><?php 
-                    if ($row['status'] == 0) {
-                        echo "<span style='color: red;'>Belum Selesai</span>" ;
-                    }else {
-                        echo "<span style='color: green;'>Selesai</span>" ;
-                    }
-                    ?></td>
-                <td>
-                    <?php if ($row['status'] == 0) { ?>
-                        <a href="?complete=<?php echo $row['id'] ?>" class="btn btn-success btn-sm" <i class="fas fa-check">Selesai</i></a>
-                    <?php } ?>
-                        <a href="?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm" <i class="fas fa-trash">Hapus</i></a>
-                </td>
+                    <td>
+                        <?php echo ($row['status'] == 0) ? "<span style='color: red;'>Belum Selesai</span>" : "<span style='color: green;'>Selesai</span>"; ?>
+                    </td>
+                    <td>
+                        <?php if ($row['status'] == 0) { ?>
+                            <a href="?complete=<?php echo $row['id'] ?>" class="btn btn-success btn-sm">Selesai</a>
+                        <?php } ?>
+                        <a href="?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                    </td>
                 </tr>
-            <?php }
-            }
-            ?>
-        </tbody>
-    </table>
+                <?php }
+                }
+                ?>
+            </tbody>
+        </table>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" rel="stylesheet"></script>
 </body>

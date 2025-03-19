@@ -52,6 +52,7 @@ $result = mysqli_query($koneksi, "SELECT * FROM task ORDER BY status ASC, priori
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     padding: 20px;
+    margin-left: 270px; /* Menyesuaikan dengan lebar sidebar */
 }
 
 .container {

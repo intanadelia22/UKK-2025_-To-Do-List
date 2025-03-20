@@ -108,41 +108,80 @@ $result = mysqli_query($koneksi, $query);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #B0D0E6;
-            padding: 20px;
-        }
-        .container {
-            max-width: 820px;
-            background: #FFFF;
-            padding: 18px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
-        h2 {
-            font-weight: bold;
-            color: #343a40;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .table {
-            margin-top: 20px;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-        }
-        th, td {
-            vertical-align: middle;
-            padding: 12px;
-            text-align: center;
-        }
-        span {
-            font-size: 14px;
-            font-weight: normal;
-        }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #B0D0E6;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    }
+
+    .container {
+        max-width: 820px;
+        background: #FFFFFF;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        margin-top: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    h2 {
+        font-weight: 600;
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+    }
+
+    .table {
+        margin-top: 20px;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        text-align: center;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        vertical-align: middle;
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    td, th {
+    line-height: 1.2;
+    }
+
+    tr {
+    height: 40px;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+
+    td {
+        font-size: 10px;
+        color: #495057;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+        transition: background 0.3s ease-in-out;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 400;
+        color: #6c757d;
+    }
+
     </style>
 </head>
 <body>
